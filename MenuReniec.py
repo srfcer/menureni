@@ -284,7 +284,7 @@ def opcion8(): #apellido materno y nombre de Madre
     resultado = apeMatnomMadre(am,mom)
     mostrarResultados(resultado)
     
-    # Calcular y mostrar el tiempo transcurrido
+    # Calcular y mostrar el tiempo transcurrido, obtener registros o colecciones
     fin = time.time()
     tiempo_transcurrido = round(fin - inicio,2)
     print("Cantidad de Colecciones:", get_contador())
