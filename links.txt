@@ -1,0 +1,9 @@
+https://www.aluracursos.com/blog/manipulando-datos-gigantes-con-pandas
+
+https://www.juliancabezas.com/post/2019-03-15-sqlite-r-memoria-csv-txt/tutorial-2/
+
+Video para principiantes (Fazt)
+https://www.youtube.com/watch?v=chPhlsHoEPo
+
+entorno virtual virtualenv
+https://www.youtube.com/watch?v=Fo-jkW8rPs8
