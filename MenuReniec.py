@@ -11,7 +11,7 @@ myDb = myClient["RENIEC"]
 myCollection = myDb["patron"]
 
 
-############################ C O N T A D O R ####################################
+#############3############################ C O N T A D O R ####################################
 def set_contador(valor):
     global contador
     contador = valor
