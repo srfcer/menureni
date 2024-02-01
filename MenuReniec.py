@@ -91,7 +91,7 @@ def apeMatnombres(am,nom):
     
     query = {"AP_MAT":am, "NOMBRES": {"$regex":patron_regex}}
     #cantidad_resultados = myCollection.count_documents(query)
-    get_contador(myCollection.count_documents(query))
+    set_contador(myCollection.count_documents(query))
     return myCollection.find(query)
     
 def apeMatnomPadre(am,pap):
