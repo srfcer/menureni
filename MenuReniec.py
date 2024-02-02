@@ -20,7 +20,7 @@ def get_contador():
     global contador
     return contador
 
-#.................................Conexión y base de datos.......................................................
+#.................................Conexión y querys a base de datos.......................................................
 
 def hacerConsulta(dni):
     query = {"DNI": dni} 
@@ -116,6 +116,20 @@ def apeMatnomMadre(am,mom):
     myCollection.create_index("MADRE")
     
     query = {"AP_MAT":am, "MADRE":{"$regex":patron_regex}}
+    #cantidad_resultados = myCollection.count_documents(query)
+    set_contador(myCollection.count_documents(query))
+    return myCollection.find(query)
+
+def apePatMatnomPadre(ap,am,pap):
+    global contador
+    # Construir el patrón de expresión regular para buscar en cualquier parte del texto
+    patron_regex = f".*{pap}.*"
+    # Crear índices
+    myCollection.create_index("AP_PAT")
+    myCollection.create_index("AP_MAT")
+    myCollection.create_index("PADRE")
+    
+    query = {"AP_PAT":ap,"AP_MAT":am, "PADRE":{"$regex":patron_regex}}
     #cantidad_resultados = myCollection.count_documents(query)
     set_contador(myCollection.count_documents(query))
     return myCollection.find(query)
@@ -290,6 +304,24 @@ def opcion8(): #apellido materno y nombre de Madre
     print("Cantidad de Colecciones:", get_contador())
     print(f"Tiempo Consulta: {tiempo_transcurrido} segundos")
     print("-" * 30)  # Línea divisoria entre documentos
+
+def opcion9(): #apellido materno y nombre de Madre
+    ap = input("Apellido Paterno: ")
+    am = input("Apellido Materno: ")
+    pap = input("Nombre de Padre: ")
+    
+    print(" ")
+    inicio = time.time()
+    
+    resultado = apePatMatnomPadre(ap,am,pap)
+    mostrarResultados(resultado)
+    
+    # Calcular y mostrar el tiempo transcurrido, obtener registros o colecciones
+    fin = time.time()
+    tiempo_transcurrido = round(fin - inicio,2)
+    print("Cantidad de Colecciones:", get_contador())
+    print(f"Tiempo Consulta: {tiempo_transcurrido} segundos")
+    print("-" * 30)  # Línea divisoria entre documentos
     
 def menu():
     print(Fore.GREEN+"1. Buscar por DNI")
@@ -300,7 +332,8 @@ def menu():
     print("6. Apellido Materno y Nombre(s)")
     print("7. Apellido Materno y Nombre de Padre")
     print("8. Apellido Materno y Nombre de Madre")
-    print("10. Salir")
+    print("9. Apellidos y Nombre de Padre")
+    print("15. Salir")
     print(" ")
     opcion = int(input(Fore.RED+"Ingrese una opción: "))
     print(" ")
@@ -322,7 +355,9 @@ def menu():
             opcion7()
         case 8:
             opcion8()
-        case 10:
+        case 9:
+            opcion9()
+        case 15:
             print("Saliendo...") 
         case _:
             print("Opción inválida")  
